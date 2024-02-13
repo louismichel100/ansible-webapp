@@ -25,4 +25,4 @@ jobs:
           tower-cli config password ${{ secrets.ANSIBLE_PASSWORD }}
           tower-cli config verify_ssl false
           tower-cli job_template list --insecure
-          tower-cli job launch --job-template=12
+          tower-cli job launch --job-template=10
