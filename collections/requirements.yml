@@ -1,2 +1,2 @@
 collections: 
-  - name: https://github.com/louismichel100/ansible-collection-webapp/releases/download/2.0.0/louismichel100-webapp-1.0.0.tar.gz
+  - name: https://github.com/louismichel100/ansible-collection-webapp/releases/download/4.0/louismichel100-webapp-1.0.0.tar.gz
