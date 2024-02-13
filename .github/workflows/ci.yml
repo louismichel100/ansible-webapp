@@ -21,9 +21,9 @@ jobs:
         run: awx --help
       - name: deploy
         run: |
-          tower-cli config host ${{ secrets.ANSIBLE_URL }}
-          tower-cli config username ${{ secrets.ANSIBLE_USER }}
-          tower-cli config password ${{ secrets.ANSIBLE_PASSWORD }}
-          tower-cli config verify_ssl false
+          export TOWER_HOST=${{ secrets.ANSIBLE_URLL }}
+          export TOWER_USERNAME=${{ secrets.ANSIBLE_USER }}
+          export TOWER_PASSWORD=${{ secrets.ANSIBLE_PASSWORD }}
+          export TOWER_VERIFY_SSL=false
           tower-cli job_template list --insecure
           tower-cli job launch --job-template=11
