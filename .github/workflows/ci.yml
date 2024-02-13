@@ -17,8 +17,8 @@ jobs:
 
       - name: Install test dependencies.
         run: pip3 install --user https://releases.ansible.com/ansible-tower/cli/ansible-tower-cli-latest.tar.gz
-      - name: install two
-        run: awx --help
+      - name: install setuptools
+        run: pip3 install setuptools
       - name: deploy
         run: |
           export TOWER_HOST=${{ secrets.ANSIBLE_URLL }}
