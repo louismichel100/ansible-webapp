@@ -26,4 +26,4 @@ jobs:
           export TOWER_PASSWORD=${{ secrets.ANSIBLE_PASSWORD }}
           export TOWER_VERIFY_SSL=false
           awx job_templates list -f human
-          awx job_templates launch 11 --monitor --wait --verbosity 0
+          awx job_templates launch 11 --monitor --wait --verbosity 1
