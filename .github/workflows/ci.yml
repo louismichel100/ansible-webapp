@@ -25,5 +25,5 @@ jobs:
           export TOWER_USERNAME=${{ secrets.ANSIBLE_USER }}
           export TOWER_PASSWORD=${{ secrets.ANSIBLE_PASSWORD }}
           export TOWER_VERIFY_SSL=false
-          tower-cli job_template list --insecure
-          tower-cli job launch --job-template=11
+          awx job_templates list -f human
+          awx job_templates launch 11 --monitor --wait --verbosity 0
