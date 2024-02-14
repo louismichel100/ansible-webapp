@@ -1,11 +1,4 @@
 ---
-# YAML documents begin with the document separator ---
-# The minus in YAML this indicates a list item.  The playbook contains a list
-# of plays, with each play being a dictionary
-#
--
-
-  # Hosts: where our play will run and options it will run with
 - name: "Name of our play"
   hosts: linux
   tasks:
