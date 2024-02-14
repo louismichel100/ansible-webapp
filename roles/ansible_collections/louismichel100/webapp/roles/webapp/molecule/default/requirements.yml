@@ -1,5 +1,0 @@
----
-- name: nginx
-  src: https://github.com/louismichel100/role_nginxx.git
-  version: main
-  scm: git
