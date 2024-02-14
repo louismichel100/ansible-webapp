@@ -1,4 +1,5 @@
 ---  
+
   hosts: linux
   tasks:
     - name: "Run nginx role from collection"
@@ -10,4 +11,3 @@
       vars:
         target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
   
-...
