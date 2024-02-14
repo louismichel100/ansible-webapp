@@ -1,0 +1,12 @@
+---
+# handlers file for nginx
+
+- name: Check HTTP Service Centos
+  ansible.builtin.uri:
+    url: http://{{ ansible_default_ipv4.address }}:81
+    status_code: 200
+
+- name: Check HTTP Service Debian
+  ansible.builtin.uri:
+    url: http://{{ ansible_default_ipv4.address }}
+    status_code: 200

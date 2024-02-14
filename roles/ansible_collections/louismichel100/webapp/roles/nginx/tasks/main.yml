@@ -1,0 +1,152 @@
+---
+# tasks file for nginx
+- name: Install EPEL
+  ansible.builtin.yum:
+    name: epel-release
+    update_cache: true
+    state: present
+  when: ansible_distribution == 'CentOS'
+  tags:
+    - install-epel
+
+- name: Install firewalld
+  ansible.builtin.yum:
+    name: firewalld
+    update_cache: true
+    state: present
+  when: ansible_distribution == 'xCentOS'
+  tags:
+    - install-firewall
+
+- name: Install python-firewalld
+  ansible.builtin.yum:
+    name: python3-firewall
+    update_cache: true
+    state: present
+  when: ansible_distribution == 'xCentOS'
+  tags:
+    - install-firewall
+
+- name: Ensure firewalld Restart on centos
+  become: true
+  ansible.builtin.service: 
+    name: firewalld 
+    state: started 
+    enabled: true
+  tags:
+    - always
+  when: ansible_facts['os_family'] == "xRedHat"
+
+- name: Firewalld | allow incoming HTTP connections
+  become: true
+  firewalld:
+    service: http
+    permanent: true
+    immediate: true
+    state: enabled
+  notify: reload_firewalld
+  when: ansible_facts['os_family'] == "RxedHat"
+
+- name: Reload_firewalld
+  become: true
+  ansible.legacy.systemd:
+    name: firewalld
+    state: reloaded
+  when: ansible_facts['os_family'] == "RxedHat"
+
+- name: Redirect port 80 to 81 on centos
+  firewalld:
+    rich_rule: rule family={{ item }} forward-port port=80 protocol=tcp to-port=81
+    zone: public
+    permanent: true
+    immediate: true
+    state: enabled
+  with_items:
+    - ipv4
+    - ipv6
+  when: ansible_distribution == 'xCentOS'
+
+
+- name: Install Nginx
+  become: true
+  ansible.builtin.package:
+    name: nginx
+    state: latest
+  tags:
+    - install-nginx
+      
+- name: Just to verify if the port is right configured
+  ansible.builtin.lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '^(.*)listen       80 default_server;(.*)$'
+  check_mode: true
+  register: out
+  when: ansible_facts['os_family'] == "xxRedHat"
+
+
+- name: If not right configured, just modified it
+  ansible.builtin.lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '^(.*)listen       80 default_server;(.*)$'
+    line: 'listen       81 default_server;'
+    backrefs: true
+  when: ansible_facts['os_family'] == "RedHat" 
+
+- name: If not right configured, just modified it second line
+  ansible.builtin.lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '^(.*)listen       \[::\]:80 default_server;(.*)$'
+    line: 'listen       [::]:81 default_server;'
+    backrefs: true
+  when: ansible_facts['os_family'] == "RedHat"
+
+
+- name: Httpd installation
+  become: true
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+  when: ansible_facts['os_family'] == "xRrredHat"
+
+- name: Httpd start and enable
+  become: true
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
+  when: ansible_facts['os_family'] == "RexdHrrrat"
+
+- name: Ensure nginx Restart nginx
+  become: true
+  ansible.builtin.service: 
+    name: nginx 
+    state: started
+    enabled: true
+  notify: Check HTTP Service Centos
+  tags:
+    - always
+  when: ansible_facts['os_family'] == "RedHat"
+
+
+- name: Ensure nginx Restart nginx on Debian
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+  notify: Check HTTP Service Debian
+  tags:
+    - always
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Ensure nginx Restart nginx on Centos
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+  notify: Check HTTP Service Centos
+  tags:
+    - always
+  when: ansible_facts['os_family'] == "RedHat"
+
