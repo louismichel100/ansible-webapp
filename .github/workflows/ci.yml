@@ -21,7 +21,7 @@ jobs:
         run: pip3 install setuptools
       - name: deploy
         run: |
-          export TOWER_HOST=${{ secrets.ANSIBLE_URLL }}
+          export TOWER_HOST=${{ secrets.ANSIBLE_URL }}
           export TOWER_USERNAME=${{ secrets.ANSIBLE_USER }}
           export TOWER_PASSWORD=${{ secrets.ANSIBLE_PASSWORD }}
           export TOWER_VERIFY_SSL=false
