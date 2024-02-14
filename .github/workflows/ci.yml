@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@main # or version tag instead of 'main'
+        
       - name: Set up Python 3.
         uses: actions/setup-python@v2
         with:
@@ -21,7 +26,7 @@ jobs:
         run: pip3 install setuptools
       - name: deploy
         run: |
-          export TOWER_HOST=${{ secrets.ANSIBLE_URLL }}
+          export TOWER_HOST=${{ secrets.ANSIBLE_URL }}
           export TOWER_USERNAME=${{ secrets.ANSIBLE_USER }}
           export TOWER_PASSWORD=${{ secrets.ANSIBLE_PASSWORD }}
           export TOWER_VERIFY_SSL=false
