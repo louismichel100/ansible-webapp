@@ -12,6 +12,7 @@
         name: louismichel100.webapp.webapp
       vars:
         target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
+#
 ...
 
 
