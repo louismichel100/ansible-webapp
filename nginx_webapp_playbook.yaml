@@ -1,17 +1,19 @@
 ---
 # YAML documents begin with the document separator ---
 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
 #
 -
 
   # Hosts: where our play will run and options it will run with
   hosts: linux
   tasks:
-    - name: "Run nginx role from collection"
-      ansible.builtin.import_role:
+    - name: "Run nginx role from collection eazytrainingfr.webapp"
+      import_role:
         name: louismichel100.webapp.nginx
-    - name: "Run webapp role from collection"
-      ansible.builtin.import_role:
+    - name: "Run webapp role from collection eazytrainingfr.webapp"
+      import_role:
         name: louismichel100.webapp.webapp
       vars:
         target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
