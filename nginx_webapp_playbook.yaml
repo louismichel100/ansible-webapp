@@ -2,10 +2,10 @@
 - name: Love play
   hosts: "{{ infra | default('linux') }}"
   tasks:
-    - name: "Run nginx role from collection eazytrainingfr.webapp"
+    - name: "Run nginx role from collection louismichel100"
       import_role:
         name: louismichel100.webapp.nginx
-    - name: "Run webapp role from collection eazytrainingfr.webapp"
+    - name: "Run webapp role from collection louismichel100"
       import_role:
         name: louismichel100.webapp.webapp
       vars:
