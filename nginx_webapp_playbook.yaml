@@ -1,6 +1,4 @@
 ---
-# YAML documents begin with the document separator ---
-
 - name: Love play
   hosts: linux
   tasks:
@@ -12,5 +10,4 @@
         name: louismichel100.webapp.webapp
       vars:
         target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
-# Three dots indicate the end of a YAML document
 ...
