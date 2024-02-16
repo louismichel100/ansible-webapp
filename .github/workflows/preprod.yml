@@ -1,5 +1,5 @@
 ---
-name: CI
+name: pre-Prod
 'on':
   push:
     branches:
