@@ -26,4 +26,3 @@ jobs:
           export TOWER_VERIFY_SSL=false
           awx job_templates list -f human
           awx job_templates launch 11 --extra-vars="infra=dev" --monitor --wait --verbosity 0
-      
