@@ -3,10 +3,10 @@
   hosts: linux
   tasks:
     - name: "Run nginx role from collection eazytrainingfr.webapp"
-      ansible.legacy.import_role:
+      import_role:
         name: louismichel100.webapp.nginx
     - name: "Run webapp role from collection eazytrainingfr.webapp"
-      ansible.legacy.import_role:
+      import_role:
         name: louismichel100.webapp.webapp
       vars:
         target_dir: "{%- if ansible_distribution == 'CentOS' -%}/usr/share/nginx/html{%- elif ansible_distribution == 'Ubuntu' -%}/var/www/html{%- endif %}"
