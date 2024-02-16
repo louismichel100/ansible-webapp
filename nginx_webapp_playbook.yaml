@@ -1,6 +1,6 @@
 ---
 - name: Love play
-  hosts: linux
+  hosts: "{{ infra | default('linux') }}"
   tasks:
     - name: "Run nginx role from collection eazytrainingfr.webapp"
       import_role:
