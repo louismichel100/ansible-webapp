@@ -1,1 +1,2 @@
 nginx_webapp_playbook.yaml var-naming[no-role-prefix]
+nginx_webapp_playbook.yaml fqcn[action-core]
