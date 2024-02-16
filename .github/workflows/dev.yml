@@ -1,5 +1,5 @@
 ---
-name: CI
+name: DEV
 'on':
   pull_request:
 jobs:
